@@ -1,17 +1,20 @@
 <?php
 
-use App\Http\Controllers\AdminAuth\AuthenticatedSessionController;
-use App\Http\Controllers\AdminAuth\ConfirmablePasswordController;
-use App\Http\Controllers\AdminAuth\EmailVerificationNotificationController;
-use App\Http\Controllers\AdminAuth\EmailVerificationPromptController;
-use App\Http\Controllers\AdminAuth\NewPasswordController;
-use App\Http\Controllers\AdminAuth\PasswordController;
-use App\Http\Controllers\AdminAuth\PasswordResetLinkController;
-use App\Http\Controllers\AdminAuth\RegisteredUserController;
-use App\Http\Controllers\AdminAuth\VerifyEmailController;
+use App\Http\Controllers\Adminauth\AuthenticatedSessionController;
+use App\Http\Controllers\Adminauth\ConfirmablePasswordController;
+use App\Http\Controllers\Adminauth\EmailVerificationNotificationController;
+use App\Http\Controllers\Adminauth\EmailVerificationPromptController;
+use App\Http\Controllers\Adminauth\NewPasswordController;
+use App\Http\Controllers\Adminauth\PasswordController;
+use App\Http\Controllers\Adminauth\PasswordResetLinkController;
+use App\Http\Controllers\Adminauth\RegisteredUserController;
+use App\Http\Controllers\Adminauth\VerifyEmailController;
 use Illuminate\Support\Facades\Route;
 
-Route::group(['middleware' => ['guest:admin'],'prefix' => 'admin' , 'as'=> 'admin.'], function(){
+
+Route::group(['middleware' => ['guest:admin'], 'prefix' => 'admin', 'as' => 'admin.'], function(){
+    // code here
+
     Route::get('register', [RegisteredUserController::class, 'create'])
                 ->name('register');
 
@@ -35,7 +38,7 @@ Route::group(['middleware' => ['guest:admin'],'prefix' => 'admin' , 'as'=> 'admi
                 ->name('password.store');
 });
 
-Route::group(['middleware' => ['auth:admin'],'prefix' => 'admin' , 'as'=> 'admin.'], function(){
+Route::group(['middleware' => ['auth:admin'], 'prefix' => 'admin', 'as' => 'admin.'], function(){
     Route::get('verify-email', EmailVerificationPromptController::class)
                 ->name('verification.notice');
 

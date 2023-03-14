@@ -1,9 +1,9 @@
 <?php
 
-namespace App\Http\Controllers\AdminAuth;
+namespace App\Http\Controllers\Adminauth;
 
 use App\Http\Controllers\Controller;
-use App\Http\Requests\AdminAuth\LoginRequest;
+use App\Http\Requests\Adminauth\LoginRequest;
 use App\Providers\RouteServiceProvider;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
