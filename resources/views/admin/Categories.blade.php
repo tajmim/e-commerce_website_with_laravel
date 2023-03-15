@@ -43,7 +43,34 @@
             </form>
 
 
+            
+            <h1></h1>
+            
 
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th scope="col">#</th>
+                        <th scope="col">Category Name</th>
+                        <th scope="col">Action</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @php
+                    $sirial = 0;
+                    @endphp
+                    @foreach($categories as $category)
+                    @php
+                    $sirial++;
+                    @endphp
+                    <tr>
+                        <th scope="row">{{$sirial}}</th>
+                        <td>{{$category->category_name}}</td>
+                        <td><a href="/delete_cat/{{$category->id}}">delete</a></td>
+                    </tr>
+                    @endforeach
+                </tbody>
+            </table>
 
            
 

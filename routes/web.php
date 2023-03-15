@@ -51,3 +51,4 @@ Route::get('/route-categories',[AdminController::Class,'fun_categories']);
 
 
 Route::post('/add_category',[AdminController::Class,'add_categories']);
+Route::get('/delete_cat/{id}',[AdminController::Class,'delete_category']);
