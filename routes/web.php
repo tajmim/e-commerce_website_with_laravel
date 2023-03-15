@@ -39,3 +39,13 @@ Route::get('/admin/dashboard', function () {
 
 
 require __DIR__.'/adminauth.php';
+
+
+
+Route::get('/shop', function () {
+    return view('shop');
+});
+
+Route::get('/admin_dashboard', function () {
+    return view('admin.admin');
+});
