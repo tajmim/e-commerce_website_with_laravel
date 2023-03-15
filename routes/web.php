@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\AdminController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -46,6 +47,7 @@ Route::get('/shop', function () {
     return view('shop');
 });
 
-Route::get('/admin_dashboard', function () {
-    return view('admin.admin');
-});
+Route::get('/route-categories',[AdminController::Class,'fun_categories']);
+
+
+Route::post('/add_category',[AdminController::Class,'add_categories']);
