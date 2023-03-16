@@ -66,7 +66,7 @@
                     <tr>
                         <th scope="row">{{$sirial}}</th>
                         <td>{{$category->category_name}}</td>
-                        <td><a href="/delete_cat/{{$category->id}}">delete</a></td>
+                        <td><a href="/delete_cat/{{$category->id}}" onclick="return confirm('are you sure want to delete {{$category->category_name}} category?')")>delete</a></td>
                     </tr>
                     @endforeach
                 </tbody>
