@@ -27,28 +27,26 @@
             <!-- Navbar End -->
 
 
-            <h1 style="font-size: 30px; margin: 20px; font-weight: bold;">Add Product</h1>
+            <h1 style="font-size: 30px; margin: 20px; font-weight: bold;">Edit Product</h1>
 
-            <form action="{{url('submit_product')}}" method="POST" enctype="multipart/form-data">
+            <form action="{{url('edit_submit_product',$edit_product->id)}}" method="POST" enctype="multipart/form-data">
                 @csrf
 
                 <div class="mb-3">
                     <label for="product_title" class="form-label">Product title</label>
-                    <input type="text" class="form-control" id="product_title"
-                        name="titlee">
+                    <input type="text" class="form-control" id="product_title" name="titlee" value="{{$edit_product->title}}">
                 </div>
 
                 <div class="mb-3">
                     <label for="product_description" class="form-label">Product description</label>
-                    <input type="text" class="form-control" id="product_description"
-                        name="product_description">
+                    <input type="text" class="form-control" id="product_description" name="product_description" value="{{$edit_product->description}}">
                 </div>
 
                 <div class="mb-3">
                     <label for="product_description" class="form-label">Category</label>
                     <select type="text" class="form-control" id="product_category" name="product_category">
 
-                        <option>Add a category</option>
+                        <option value="{{$edit_product->title}}" selected>{{$edit_product->category}}</option>
 
                         @foreach($categories as $category)
                         <option value="{{$category->category_name}}">{{$category->category_name}}</option>
@@ -60,19 +58,22 @@
                 <div class="mb-3">
                     <label for="price" class="form-label">Price</label>
                     <input type="text" class="form-control" id="price"
-                        name="price">
+                        name="price" value="{{$edit_product->price}}">
                 </div>
 
                 <div class="mb-3">
                     <label for="reseller_price" class="form-label">Reseller price</label>
-                    <input type="text" class="form-control" id="reseller_price"
-                        name="reseller_price">
+                    <input type="text" class="form-control" id="reseller_price" name="reseller_price" value="{{$edit_product->reseller_price}}">
                 </div>
 
                 <div class="mb-3">
                     <label for="discount_price" class="form-label">Discount price</label>
-                    <input type="text" class="form-control" id="discount_price"
-                        name="discount_price">
+                    <input type="text" class="form-control" id="discount_price" name="discount_price" value="{{$edit_product->discount_price}}">
+                </div>
+
+                <div class="mb-3">
+                    <label>Existing Image</label>
+                    <img src="img_product/{{$edit_product->image}}" style="width:120px;height:60px;">
                 </div>
 
                 <div class="mb-3">
@@ -82,12 +83,11 @@
 
                 <div class="mb-3">
                     <label for="quantity" class="form-label">Quantity</label>
-                    <input type="text" class="form-control" id="quantity"
-                        name="quantity">
+                    <input type="text" class="form-control" id="quantity" value="{{$edit_product->quantity}}"name="quantity">
                 </div>
                 
             
-                <button type="submit" class="btn btn-primary">Add Product</button>
+                <button type="submit" class="btn btn-primary">Edit Product</button>
             </form>
 
 

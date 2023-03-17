@@ -54,3 +54,9 @@ Route::get('/delete_cat/{id}',[AdminController::Class,'delete_category']);
 
 Route::get('/add_product',[AdminController::Class,'add_product']);
 Route::post('/submit_product',[AdminController::Class,'submit_product']);
+Route::get('/view_product',[AdminController::Class,'view_product']);
+Route::get('/delete_product/{id}',[AdminController::Class,'delete_product']);
+Route::get('/edit_product/{id}',[AdminController::Class,'edit_product']);
+Route::post('/edit_submit_product/{id}',[AdminController::Class,'edit_submit_product']);
+Route::get('/approve_product/{id}',[AdminController::Class,'approve_product']);
+Route::get('/unapprove_product/{id}',[AdminController::Class,'unapprove_product']);
