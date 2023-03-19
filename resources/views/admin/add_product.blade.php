@@ -42,6 +42,12 @@
                     <label for="product_description" class="form-label">Product description</label>
                     <input type="text" class="form-control" id="product_description"
                         name="product_description">
+                </div>            
+
+                <div class="mb-3">
+                    <label for="additional_information" class="form-label">Additional information</label>
+                    <input type="text" class="form-control" id="additional_information"
+                        name="additional_information">
                 </div>
 
                 <div class="mb-3">
@@ -76,8 +82,23 @@
                 </div>
 
                 <div class="mb-3">
-                    <label for="image" class="form-label">Image</label>
+                    <label for="image" class="form-label">Primary Image</label>
                     <input type="file" class="form-control" id="image"name="image">
+                </div>
+
+                <div class="mb-3">
+                    <label for="image" class="form-label">Secondary Image</label>
+                    <input type="file" class="form-control" id="image"name="image1">
+                </div>
+
+                <div class="mb-3">
+                    <label for="image" class="form-label">Secondary Image</label>
+                    <input type="file" class="form-control" id="image"name="image2">
+                </div>
+
+                <div class="mb-3">
+                    <label for="image" class="form-label">Secondary Image</label>
+                    <input type="file" class="form-control" id="image"name="image3">
                 </div>
 
                 <div class="mb-3">

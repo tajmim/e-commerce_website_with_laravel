@@ -38,12 +38,17 @@
                 </div>
 
                 <div class="mb-3">
-                    <label for="product_description" class="form-label">Product description</label>
+                    <label for="product_description" class="form-label">Product Description</label>
                     <input type="text" class="form-control" id="product_description" name="product_description" value="{{$edit_product->description}}">
                 </div>
 
                 <div class="mb-3">
-                    <label for="product_description" class="form-label">Category</label>
+                    <label for="additional_information" class="form-label">Additional Information</label>
+                    <input type="text" class="form-control" id="additional_information" name="additional_information" value="{{$edit_product->additional_information}}">
+                </div>
+
+                <div class="mb-3">
+                    <label for="category" class="form-label">Category</label>
                     <select type="text" class="form-control" id="product_category" name="product_category">
 
                         <option value="{{$edit_product->title}}" selected>{{$edit_product->category}}</option>
@@ -72,13 +77,39 @@
                 </div>
 
                 <div class="mb-3">
-                    <label>Existing Image</label>
+                    <label>Existing Primary Image</label>
                     <img src="img_product/{{$edit_product->image}}" style="width:120px;height:60px;">
                 </div>
-
                 <div class="mb-3">
                     <label for="image" class="form-label">Image</label>
                     <input type="file" class="form-control" id="image"name="image">
+                </div>
+
+                <div class="mb-3">
+                    <label>Existing Secondary Image</label>
+                    <img src="img_product/{{$edit_product->image1}}" style="width:120px;height:60px;">
+                </div>
+                <div class="mb-3">
+                    <label for="image" class="form-label">Image</label>
+                    <input type="file" class="form-control" id="image"name="image1">
+                </div>
+
+                <div class="mb-3">
+                    <label>Existing Secondary Image</label>
+                    <img src="img_product/{{$edit_product->image2}}" style="width:120px;height:60px;">
+                </div>
+                <div class="mb-3">
+                    <label for="image" class="form-label">Image</label>
+                    <input type="file" class="form-control" id="image"name="image2">
+                </div>
+
+                <div class="mb-3">
+                    <label>Existing Secondary Image</label>
+                    <img src="img_product/{{$edit_product->image3}}" style="width:120px;height:60px;">
+                </div>
+                <div class="mb-3">
+                    <label for="image" class="form-label">Image</label>
+                    <input type="file" class="form-control" id="image"name="image3">
                 </div>
 
                 <div class="mb-3">

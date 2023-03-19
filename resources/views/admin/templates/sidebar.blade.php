@@ -10,7 +10,7 @@
                     </div>
                     <div class="ms-3">
                         <h6 class="mb-0">{{ Auth::guard('admin')->user()->name }}</h6>
-                        <span>{{ Auth::guard('admin')->user()->usertype }}</span>
+                        <span>{{ Auth::guard('admin')->user()->usertype}}</span>
                     </div>
                 </div>
                 <div class="navbar-nav w-100">

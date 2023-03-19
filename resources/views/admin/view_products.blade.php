@@ -25,6 +25,9 @@
             <!-- Navbar Start -->
             @include('admin.templates.navbar');
             <!-- Navbar End -->
+
+
+            
             @if(auth::guard('admin')->user()->usertype == 'admin')
 
                 <h1 style="font-size: 30px; margin: 20px; font-weight: bold;">All requested Products are here</h1>

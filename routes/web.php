@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\AdminController;
+use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -15,13 +16,8 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
 
-Route::get('/dashboard', function () {
-    return view('dashboard');
-})->middleware(['auth', 'verified'])->name('dashboard');
+Route::get('/dashboard',[UserController::Class,'home'])->middleware(['auth', 'verified'])->name('dashboard');
 
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
@@ -42,10 +38,7 @@ Route::get('/admin/dashboard', function () {
 require __DIR__.'/adminauth.php';
 
 
-
-Route::get('/shop', function () {
-    return view('shop');
-});
+// admincontroller
 
 Route::get('/route-categories',[AdminController::Class,'fun_categories']);
 
@@ -60,3 +53,11 @@ Route::get('/edit_product/{id}',[AdminController::Class,'edit_product']);
 Route::post('/edit_submit_product/{id}',[AdminController::Class,'edit_submit_product']);
 Route::get('/approve_product/{id}',[AdminController::Class,'approve_product']);
 Route::get('/unapprove_product/{id}',[AdminController::Class,'unapprove_product']);
+// admincontroller end
+
+// usercontroller start
+Route::get('/',[UserController::Class,'home']);
+Route::get('/shop',[UserController::Class,'shop']);
+Route::get('/product_details/{id}',[UserController::Class,'product_details']);
+
+// usercontroller end
