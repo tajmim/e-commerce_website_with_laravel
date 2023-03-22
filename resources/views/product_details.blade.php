@@ -85,7 +85,26 @@
                                     </div><!-- End .rating-container -->
 
                                     <div class="product-price">
-                                        &#2547; {{$product->price}}
+                                        
+
+                                        @auth
+
+                                            @if( Auth::guard('web')->user()->usertype == 'reseller' )
+                                               <h1 style="width: 100%;">Regular Price <span style="text-decoration:line-through;color:blue">{{$product->price}}</span> </h1>
+
+                                               <h1 style="width: 100%;">Reseller price : <span style="color:blue;">{{$product->reseller_price}}</span></h1>
+                                            @else
+                                            <h1 style="width: 100%;">Regular Price <span style="color:blue;">{{$product->price}}</span> </h1>
+                                            <br>
+                                            @endif
+
+                                        @else
+                                        <p style="width: 100%;">Regular Price <span style="color:blue;">{{$product->price}}</span> </p>
+
+                                        @endauth
+
+
+
                                     </div><!-- End .product-price -->
 
                                     <div class="product-content">
@@ -562,8 +581,22 @@
 
                 <div class="col-6 justify-content-end">
                     <div class="product-price">
-                       &#2547; {{$product->price}}
-                    </div><!-- End .product-price -->
+                                            @auth
+
+                                            @if( Auth::guard('web')->user()->usertype == 'reseller' )
+                                               <h1 style="width: 100%;">Regular Price <span style="text-decoration:line-through;color:blue">{{$product->price}}</span> </h1>
+
+                                               <h1 style="width: 100%;">Reseller price : <span style="color:blue;">{{$product->reseller_price}}</span></h1>
+                                            @else
+                                            <h1 style="width: 100%;">Regular Price <span style="color:blue;">{{$product->price}}</span> </h1>
+                                            <br>
+                                            @endif
+
+                                        @else
+                                        <p style="width: 100%;">Regular Price <span style="color:blue;">{{$product->price}}</span> </p>
+
+                                        @endauth                    
+                                    </div><!-- End .product-price -->
                     <div class="product-details-quantity">
                         <input type="number" id="sticky-cart-qty" class="form-control" value="1" min="1" max="10" step="1" data-decimals="0" required>
                     </div><!-- End .product-details-quantity -->

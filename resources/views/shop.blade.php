@@ -84,7 +84,36 @@
                                         </div><!-- End .product-cat -->
                                         <h3 class="product-title"><a href="product.html">{{$product->title}}</a></h3><!-- End .product-title -->
                                         <div class="product-price">
-                                           {{$product->price}}
+
+                                        @auth
+
+                                            @if( Auth::guard('web')->user()->usertype == 'reseller' )
+                                               <h1 style="width: 100%;">Regular Price <span style="text-decoration:line-through;color:blue">{{$product->price}}</span> </h1>
+
+                                               <h1 style="width: 100%;">Reseller price : <span style="color:blue;">{{$product->reseller_price}}</span></h1>
+                                            @else
+                                            <h1 style="width: 100%;">Regular Price <span style="color:blue;">{{$product->price}}</span> </h1>
+                                            <br>
+                                            @endif
+
+                                        @else
+                                        <p style="width: 100%;">Regular Price <span style="color:blue;">{{$product->price}}</span> </p>
+
+                                        @endauth
+                                        
+
+
+
+
+
+
+
+
+
+
+
+
+
                                         </div><!-- End .product-price -->
                                         <div class="ratings-container">
                                             <div class="ratings">
