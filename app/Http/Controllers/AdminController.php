@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 use Illuminate\Support\Facades\File;
 use App\Models\category;
 use App\Models\product;
+use App\Models\User;
+use App\Models\Admin;
 
 use Illuminate\Http\Request;
 
@@ -199,6 +201,43 @@ class AdminController extends Controller
         return redirect()->back();
 
     }
+
+    public function manage_customer(){
+        $users = User::All();
+        return view("admin.manage_customer",compact('users'));
+    }
+    public function delete_user($id)
+    {
+        $user = User::find($id);
+        $user->delete();
+        return redirect()->back();
+    }
+    public function approve_reseller($id)
+    {
+        $user = User::find($id);
+        $user->usertype = 'reseller';
+        $user->save();
+        return redirect()->back();
+    }
+    public function unapprove_reseller($id)
+    {
+        $user = User::find($id);
+        $user->usertype = 'customer';
+        $user->save();
+        return redirect()->back();
+    }
+    public function manage_editors(){
+        $editors = Admin::All();
+        return view('admin.manage_editors',compact('editors'));
+
+    }
+    public function delete_editor($id)
+    {
+        $editor = Admin::find($id);
+        $editor->delete();
+        return redirect()->back();
+    }
+
 
 
 }

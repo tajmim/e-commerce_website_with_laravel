@@ -53,11 +53,18 @@ Route::get('/edit_product/{id}',[AdminController::Class,'edit_product']);
 Route::post('/edit_submit_product/{id}',[AdminController::Class,'edit_submit_product']);
 Route::get('/approve_product/{id}',[AdminController::Class,'approve_product']);
 Route::get('/unapprove_product/{id}',[AdminController::Class,'unapprove_product']);
+Route::get('/manage_customer',[AdminController::Class,'manage_customer']);
+Route::get('/delete_user/{id}',[AdminController::Class,'delete_user']);
+Route::get('/approve_user/{id}',[AdminController::Class,'approve_reseller']);
+Route::get('/unapprove_user/{id}',[AdminController::Class,'unapprove_reseller']);
+Route::get('/manage_editors',[AdminController::Class,'manage_editors']);
+Route::get('/delete_editor/{id}',[AdminController::Class,'delete_editor']);
 // admincontroller end
 
 // usercontroller start
 Route::get('/',[UserController::Class,'home']);
 Route::get('/shop',[UserController::Class,'shop']);
 Route::get('/product_details/{id}',[UserController::Class,'product_details']);
+Route::get('/request_for_reseller',[UserController::Class,'request_for_reseller']);
 
 // usercontroller end
