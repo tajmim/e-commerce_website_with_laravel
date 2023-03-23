@@ -66,5 +66,6 @@ Route::get('/',[UserController::Class,'home']);
 Route::get('/shop',[UserController::Class,'shop']);
 Route::get('/product_details/{id}',[UserController::Class,'product_details']);
 Route::get('/request_for_reseller',[UserController::Class,'request_for_reseller']);
-
+Route::post('/add_to_cart/{product_id}',[UserController::Class,'add_to_cart']);
+Route::get('/view_cart',[UserController::Class,'view_cart']);
 // usercontroller end

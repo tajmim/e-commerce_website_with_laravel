@@ -128,15 +128,17 @@
                                         <a href="#" class="size-guide"><i class="icon-th-list"></i>size guide</a>
                                     </div><!-- End .details-filter-row -->
 
-                                    <div class="details-filter-row details-row-size">
-                                        <label for="qty">Qty:</label>
-                                        <div class="product-details-quantity">
-                                            <input type="number" id="qty" class="form-control" value="1" min="1" max="10" step="1" data-decimals="0" required>
-                                        </div><!-- End .product-details-quantity -->
-                                    </div><!-- End .details-filter-row -->
-
+                                    
                                     <div class="product-details-action">
-                                        <a href="#" class="btn-product btn-cart"><span>add to cart</span></a>
+                                        <form action="{{url('add_to_cart',$product->id)}}" method="POST">
+                                            @csrf
+                                            <div class="form-group">
+                                                <label for="qty" class="form-level">Qty:</label>
+                                                <input type="number" id="sticky-cart-qty" class="form-control" value="1" min="1" max="{{$product->quantity}}" step="1" data-decimals="0" name="quantity" required>
+                                            </div>
+                                            <input type="submit" name="submit" class="btn-product btn-cart" value="Add to cart">
+                                        </form>
+
 
                                         
                                     </div><!-- End .product-details-action -->
@@ -598,11 +600,15 @@
                                         @endauth                    
                                     </div><!-- End .product-price -->
                     <div class="product-details-quantity">
-                        <input type="number" id="sticky-cart-qty" class="form-control" value="1" min="1" max="10" step="1" data-decimals="0" required>
+                        <form action="/add_to_cart/{{$product->id}}" method="POST">
+                            <input type="number" id="sticky-cart-qty" class="form-control" value="1" min="1" max="10" step="1" data-decimals="0" required>
+                            <input type="submit" name="submit" class="btn-product btn-cart" value="Add to cart">
+                        </form>
+                                                
                     </div><!-- End .product-details-quantity -->
 
                     <div class="product-details-action">
-                        <a href="#" class="btn-product btn-cart"><span>add to cart</span></a>
+                        
                         <a href="#" class="btn-product btn-wishlist" title="Wishlist"><span>Add to Wishlist</span></a>
                     </div><!-- End .product-details-action -->
                 </div><!-- End .col-6 -->
