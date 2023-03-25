@@ -50,10 +50,28 @@
 	            				<h4 class="widget-title">My Account</h4><!-- End .widget-title -->
 
 	            				<ul class="widget-list">
-	            					<li><a href="#">Sign In</a></li>
-	            					<li><a href="cart.html">View Cart</a></li>
-	            					<li><a href="#">My Wishlist</a></li>
-	            					<li><a href="#">Track My Order</a></li>
+	            					@if (Route::has('login'))
+                                    
+                                        @auth
+                                        <li><a href="/view_cart">View Cart</a></li>
+		            					<li><a href="/view_wishlist">My Wishlist</a></li>
+		            					<li><a href="/track_order">Track My Order</a></li>
+                                        @else
+                                        <li>
+                                            <a href="{{ route('login') }}">Log in</a>
+                                        </li>
+                                            @if (Route::has('register'))
+                                            <li>
+                                                <a href="{{ route('register') }}">Register</a>
+                                                <
+                                            @endif
+                                        @endauth
+                                    
+                                @endif
+                                  
+
+	            					
+	            					
 	            					<li><a href="#">Help</a></li>
 	            				</ul><!-- End .widget-list -->
 	            			</div><!-- End .widget -->

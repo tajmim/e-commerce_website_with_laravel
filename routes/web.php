@@ -68,4 +68,10 @@ Route::get('/product_details/{id}',[UserController::Class,'product_details']);
 Route::get('/request_for_reseller',[UserController::Class,'request_for_reseller']);
 Route::post('/add_to_cart/{product_id}',[UserController::Class,'add_to_cart']);
 Route::get('/view_cart',[UserController::Class,'view_cart']);
+Route::get('/add_to_wishlist/{product_id}',[UserController::Class,'add_to_wishlist']);
+Route::get('/view_wishlist',[UserController::Class,'view_wishlist']);
+Route::get('/delete_cart/{id}',[UserController::Class,'delete_cart']);
+Route::get('/delete_wish/{id}',[UserController::Class,'delete_wish']);
+Route::get('/checkout',[UserController::Class,'checkout']);
+Route::post('/proceed_to_checkout',[UserController::Class,'proceed_to_checkout']);
 // usercontroller end

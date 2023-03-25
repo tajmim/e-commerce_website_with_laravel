@@ -72,9 +72,16 @@
                                         </div>
 
                                         <div class="product-action action-icon-top">
-                                            <a href="#" class="btn-product btn-cart"><span>add to cart</span></a>
-                                            <a href="popup/quickView.html" class="btn-product btn-quickview" title="Quick view"><span>quick view</span></a>
-                                            <a href="#" class="btn-product btn-compare" title="Compare"><span>compare</span></a>
+                                            <form action="{{url('add_to_cart',$product->id)}}" method="POST">
+                                            @csrf
+                                            <div class="form-group">
+                                                <label for="qty" class="form-level">Qty:</label>
+                                                <input type="number" id="sticky-cart-qty" class="form-control" value="1" min="1"  step="1" data-decimals="0" name="quantity" required>
+                                            </div>
+                                            <input type="submit" name="submit" class="btn-product btn-cart" value="Add to cart">
+                                        </form>
+                                            
+                                          <a href="/add_to_wishlist/{{$product->id}}" class="btn-product btn-wishlist" title="Wishlist"><span>Add to Wishlist</span></a>  
                                         </div><!-- End .product-action -->
                                     </figure><!-- End .product-media -->
 

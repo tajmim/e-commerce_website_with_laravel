@@ -31,7 +31,9 @@
                                 <ul>
                                     <li><a href="tel:#"><i class="icon-phone"></i>Call: +0123 456 789</a></li>
                                     <li><a href="about.html">About Us</a></li>
-
+                                    @auth
+                                    <li><a href="/view_wishlist"><i class="icon-heart-o"></i>Wishlist </a></li>
+                                    @endauth
 
 
                                     
@@ -79,10 +81,10 @@
                         <nav class="main-nav">
                             <ul class="menu sf-arrows">
                                 <li class="megamenu-container active">
-                                    <a href="index.html" class="sf-with-ul">Home</a>
+                                    <a href="/" class="sf-with-ul">Home</a>
                                 </li>
                                 <li>
-                                    <a href="category.html" class="sf-with-ul">Shop</a>
+                                    <a href="/shop" class="sf-with-ul">Shop</a>
                                 </li>
                                  <li>
                                     <a href="product.html" class="sf-with-ul">Product</a>                                   

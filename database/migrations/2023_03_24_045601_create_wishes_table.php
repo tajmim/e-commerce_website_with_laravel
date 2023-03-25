@@ -13,6 +13,12 @@ return new class extends Migration
     {
         Schema::create('wishes', function (Blueprint $table) {
             $table->id();
+            $table->string('user_id');
+            $table->string('user_name');
+            $table->string('product_id');
+            $table->string('product_title');
+            $table->string('product_image');
+            $table->string('price');
             $table->timestamps();
         });
     }

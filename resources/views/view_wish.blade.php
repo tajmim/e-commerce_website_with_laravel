@@ -2,21 +2,23 @@
 <html lang="en">
 
 
-<!-- molla/cart.html  22 Nov 2019 09:55:06 GMT -->
+<!-- molla/wishlist.html  22 Nov 2019 09:55:05 GMT -->
 <head>
-      @include('templates.head');
+    @include('templates.head');
 </head>
 
 <body>
     <div class="page-wrapper">
-        <!-- header start -->
-         @include('templates.header');
+
+        <!-- start .header -->
+
+        @include('templates.header');
         <!-- End .header -->
 
         <main class="main">
-        	<div class="page-header text-center" style="background-image: url('assets/images/page-header-bg.jpg')">
+        	<div class="page-header text-center" style="background-image: url('user/assets/images/page-header-bg.jpg')">
         		<div class="container">
-        			<h1 class="page-title">Shopping Cart<span>Shop</span></h1>
+        			<h1 class="page-title">Wishlist<span>Shop</span></h1>
         		</div><!-- End .container -->
         	</div><!-- End .page-header -->
             <nav aria-label="breadcrumb" class="breadcrumb-nav">
@@ -24,137 +26,150 @@
                     <ol class="breadcrumb">
                         <li class="breadcrumb-item"><a href="index.html">Home</a></li>
                         <li class="breadcrumb-item"><a href="#">Shop</a></li>
-                        <li class="breadcrumb-item active" aria-current="page">Shopping Cart</li>
+                        <li class="breadcrumb-item active" aria-current="page">Wishlist</li>
                     </ol>
                 </div><!-- End .container -->
             </nav><!-- End .breadcrumb-nav -->
 
             <div class="page-content">
-            	<div class="cart">
-	                <div class="container">
-	                	<div class="row">
-	                		<div class="col-lg-9">
-	                			<table class="table table-cart table-mobile">
-									<thead>
-										<tr>
-											<th>Product</th>
-											<th>Price</th>
-											<th>Quantity</th>
-											<th>Total</th>
-											<th></th>
-										</tr>
-									</thead>
+            	<div class="container">
+					<table class="table table-wishlist table-mobile">
+						<thead>
+							<tr>
+								<th>Image</th>
+								<th>Title</th>
+								
+								<th>price</th>
+								<th>Add to cart</th>
+							</tr>
+						</thead>
 
-									<tbody>
-                                        
-                                        <?php $total_cost = 0 ?>
+						<tbody>
+                            @foreach ($wishes as $wish)
+							<tr>
+								<td class="product-col">
+									<div class="product">
+										<figure class="product-media">
+											<a href="#">
+												<img src="img_product/{{$wish->product_image}}" alt="Product image">
+											</a>
+										</figure>
 
-
-                                        @foreach($carts as $cart)
-                                        
-										<tr>
-											<td class="product-col">
-												<div class="product">
-													<figure class="product-media">
-														<a href="#">
-															<img src="img_product/{{$cart->product_image}}" alt="Product image">
-														</a>
-													</figure>
-
-													<h3 class="product-title">
-														<a href="#">{{$cart->product_title}}</a>
-													</h3><!-- End .product-title -->
-												</div><!-- End .product -->
-											</td>
-											<td class="price-col">
-                                                {{$cart->price}}
-                                                
-
-                                            </td>
-											<td class="quantity-col">
-                                                <div class="cart-product-quantity">
-                                                    {{$cart->quantity}}
-                                                </div><!-- End .cart-product-quantity -->
-                                            </td>
-											<td class="total-col">
-                                                {{$cart->quantity * $cart->price}}
-                                                 <?php 
-                                                 $total_cost = $total_cost + $cart->quantity * $cart->price 
-                                                ?>
-                                            </td>
-											<td class="remove-col"><a href="/delete_cart/{{$cart->id}}" class="btn-remove"><i class="icon-close"></i></a></td>
-										</tr>
-                                        @endforeach
-									</tbody>
-								</table><!-- End .table table-wishlist -->
-
-	                			<div class="cart-bottom">
-			            			<div class="cart-discount">
-			            				<form action="#">
-			            					<div class="input-group">
-				        						<input type="text" class="form-control" required placeholder="coupon code">
-				        						<div class="input-group-append">
-													<button class="btn btn-outline-primary-2" type="submit"><i class="icon-long-arrow-right"></i></button>
-												</div><!-- .End .input-group-append -->
-			        						</div><!-- End .input-group -->
-			            				</form>
-			            			</div><!-- End .cart-discount -->
-
-			            			<a href="#" class="btn btn-outline-dark-2"><span>UPDATE CART</span><i class="icon-refresh"></i></a>
-		            			</div><!-- End .cart-bottom -->
-	                		</div><!-- End .col-lg-9 -->
-	                		<aside class="col-lg-3">
-	                			<div class="summary summary-cart">
-	                				<h3 class="summary-title">Cart Total</h3><!-- End .summary-title -->
-
-	                				<table class="table table-summary">
-	                					<tbody>
-	                						<tr class="summary-subtotal">
-	                							<td>Subtotal:</td>
-	                							<td>{{$total_cost}}</td>
-	                						</tr><!-- End .summary-subtotal -->
-	                						<tr class="summary-shipping">
-	                							<td>Shipping:</td>
-	                							<td>&nbsp;</td>
-	                						</tr>
-
-	                						<tr class="summary-shipping-row">
-	                							<td>
-													Shipping cost
-	                							</td>
-	                							<td>60</td>
-	                						</tr><!-- End .summary-shipping-row -->
-
-	                						
-
-	                						<tr class="summary-shipping-estimate">
-	                							<td>Estimate for Your Country<br> <a href="dashboard.html">Change address</a></td>
-	                							<td>&nbsp;</td>
-	                						</tr><!-- End .summary-shipping-estimate -->
-
-	                						<tr class="summary-total">
-	                							<td>Total:</td>
-	                							<td>
-                                                    {{$total_cost+60}}
-                                                </td>
-	                						</tr><!-- End .summary-total -->
-	                					</tbody>
-	                				</table><!-- End .table table-summary -->
-
-	                				<a href="/checkout" class="btn btn-outline-primary-2 btn-order btn-block">PROCEED TO CHECKOUT</a>
-	                			</div><!-- End .summary -->
-
-		            			<a href="/shop" class="btn btn-outline-dark-2 btn-block mb-3"><span>CONTINUE SHOPPING</span><i class="icon-refresh"></i></a>
-	                		</aside><!-- End .col-lg-3 -->
-	                	</div><!-- End .row -->
-	                </div><!-- End .container -->
-                </div><!-- End .cart -->
+									</div><!-- End .product -->
+								</td>
+                                <td>
+                                    
+                                        <h3 class="product-title">
+                                            <a href="#">{{$wish->product_title}}</a>
+                                        </h3><!-- End .product-title -->
+                                </td>
+								<td class="price-col">{{$wish->price}}</td>
+								
+								<td class="action-col">
+                                          <form action="{{url('add_to_cart',$wish->product_id)}}" method="POST">
+                                            @csrf
+                                            <div class="form-group">
+                                                <label for="qty" class="form-level">Qty:</label>
+                                                <input type="number" id="sticky-cart-qty" class="form-control" value="1" min="1"  step="1" data-decimals="0" name="quantity" required>
+                                            </div>
+                                            <input type="submit" name="submit" class="btn-product btn-cart" value="Add to cart">
+                                        </form>
+                                  
+								</td>
+								<td class="remove-col"><a href="/delete_wish/{{$wish->id}}" class="btn-remove"><i class="icon-close"></i></a></td>
+							</tr>
+							@endforeach
+							
+						</tbody>
+					</table><!-- End .table table-wishlist -->
+	            	<div class="wishlist-share">
+	            		<div class="social-icons social-icons-sm mb-2">
+	            			<label class="social-label">Share on:</label>
+	    					<a href="#" class="social-icon" title="Facebook" target="_blank"><i class="icon-facebook-f"></i></a>
+	    					<a href="#" class="social-icon" title="Twitter" target="_blank"><i class="icon-twitter"></i></a>
+	    					<a href="#" class="social-icon" title="Instagram" target="_blank"><i class="icon-instagram"></i></a>
+	    					<a href="#" class="social-icon" title="Youtube" target="_blank"><i class="icon-youtube"></i></a>
+	    					<a href="#" class="social-icon" title="Pinterest" target="_blank"><i class="icon-pinterest"></i></a>
+	    				</div><!-- End .soial-icons -->
+	            	</div><!-- End .wishlist-share -->
+            	</div><!-- End .container -->
             </div><!-- End .page-content -->
         </main><!-- End .main -->
 
-        <!-- footer start -->
-         @include('templates.footer');
-        <!-- End .footer -->
+        <footer class="footer">
+        	<div class="footer-middle">
+	            <div class="container">
+	            	<div class="row">
+	            		<div class="col-sm-6 col-lg-3">
+	            			<div class="widget widget-about">
+	            				<img src="user/assets/images/logo.png" class="footer-logo" alt="Footer Logo" width="105" height="25">
+	            				<p>Praesent dapibus, neque id cursus ucibus, tortor neque egestas augue, eu vulputate magna eros eu erat. </p>
+
+	            				<div class="social-icons">
+	            					<a href="#" class="social-icon" target="_blank" title="Facebook"><i class="icon-facebook-f"></i></a>
+	            					<a href="#" class="social-icon" target="_blank" title="Twitter"><i class="icon-twitter"></i></a>
+	            					<a href="#" class="social-icon" target="_blank" title="Instagram"><i class="icon-instagram"></i></a>
+	            					<a href="#" class="social-icon" target="_blank" title="Youtube"><i class="icon-youtube"></i></a>
+	            					<a href="#" class="social-icon" target="_blank" title="Pinterest"><i class="icon-pinterest"></i></a>
+	            				</div><!-- End .soial-icons -->
+	            			</div><!-- End .widget about-widget -->
+	            		</div><!-- End .col-sm-6 col-lg-3 -->
+
+	            		<div class="col-sm-6 col-lg-3">
+	            			<div class="widget">
+	            				<h4 class="widget-title">Useful Links</h4><!-- End .widget-title -->
+
+	            				<ul class="widget-list">
+	            					<li><a href="about.html">About Molla</a></li>
+	            					<li><a href="#">How to shop on Molla</a></li>
+	            					<li><a href="#">FAQ</a></li>
+	            					<li><a href="contact.html">Contact us</a></li>
+	            					<li><a href="login.html">Log in</a></li>
+	            				</ul><!-- End .widget-list -->
+	            			</div><!-- End .widget -->
+	            		</div><!-- End .col-sm-6 col-lg-3 -->
+
+	            		<div class="col-sm-6 col-lg-3">
+	            			<div class="widget">
+	            				<h4 class="widget-title">Customer Service</h4><!-- End .widget-title -->
+
+	            				<ul class="widget-list">
+	            					<li><a href="#">Payment Methods</a></li>
+	            					<li><a href="#">Money-back guarantee!</a></li>
+	            					<li><a href="#">Returns</a></li>
+	            					<li><a href="#">Shipping</a></li>
+	            					<li><a href="#">Terms and conditions</a></li>
+	            					<li><a href="#">Privacy Policy</a></li>
+	            				</ul><!-- End .widget-list -->
+	            			</div><!-- End .widget -->
+	            		</div><!-- End .col-sm-6 col-lg-3 -->
+
+	            		<div class="col-sm-6 col-lg-3">
+	            			<div class="widget">
+	            				<h4 class="widget-title">My Account</h4><!-- End .widget-title -->
+
+	            				<ul class="widget-list">
+	            					<li><a href="#">Sign In</a></li>
+	            					<li><a href="cart.html">View Cart</a></li>
+	            					<li><a href="#">My Wishlist</a></li>
+	            					<li><a href="#">Track My Order</a></li>
+	            					<li><a href="#">Help</a></li>
+	            				</ul><!-- End .widget-list -->
+	            			</div><!-- End .widget -->
+	            		</div><!-- End .col-sm-6 col-lg-3 -->
+	            	</div><!-- End .row -->
+	            </div><!-- End .container -->
+	        </div><!-- End .footer-middle -->
+
+	        <div class="footer-bottom">
+	        	<div class="container">
+	        		<p class="footer-copyright">Copyright © 2019 Molla Store. All Rights Reserved.</p><!-- End .footer-copyright -->
+	        		<figure class="footer-payments">
+	        			<img src="user/assets/images/payments.png" alt="Payment methods" width="272" height="20">
+	        		</figure><!-- End .footer-payments -->
+	        	</div><!-- End .container -->
+	        </div><!-- End .footer-bottom -->
+        </footer><!-- End .footer -->
     </div><!-- End .page-wrapper -->
     <button id="scroll-top" title="Back to Top"><i class="icon-arrow-up"></i></button>
 
@@ -187,20 +202,6 @@
                             <li><a href="index-8.html">08 - fashion store</a></li>
                             <li><a href="index-9.html">09 - fashion store</a></li>
                             <li><a href="index-10.html">10 - shoes store</a></li>
-                            <li><a href="index-11.html">11 - furniture simple store</a></li>
-                            <li><a href="index-12.html">12 - fashion simple store</a></li>
-                            <li><a href="index-13.html">13 - market</a></li>
-                            <li><a href="index-14.html">14 - market fullwidth</a></li>
-                            <li><a href="index-15.html">15 - lookbook 1</a></li>
-                            <li><a href="index-16.html">16 - lookbook 2</a></li>
-                            <li><a href="index-17.html">17 - fashion store</a></li>
-                            <li><a href="index-18.html">18 - fashion store (with sidebar)</a></li>
-                            <li><a href="index-19.html">19 - games store</a></li>
-                            <li><a href="index-20.html">20 - book store</a></li>
-                            <li><a href="index-21.html">21 - sport store</a></li>
-                            <li><a href="index-22.html">22 - tools store</a></li>
-                            <li><a href="index-23.html">23 - fashion left navigation store</a></li>
-                            <li><a href="index-24.html">24 - extreme sport store</a></li>
                         </ul>
                     </li>
                     <li>
@@ -451,11 +452,10 @@
     <script src="user/assets/js/jquery.waypoints.min.js"></script>
     <script src="user/assets/js/superfish.min.js"></script>
     <script src="user/assets/js/owl.carousel.min.js"></script>
-    <script src="user/assets/js/bootstrap-input-spinner.js"></script>
     <!-- Main JS File -->
     <script src="user/assets/js/main.js"></script>
 </body>
 
 
-<!-- molla/cart.html  22 Nov 2019 09:55:06 GMT -->
+<!-- molla/wishlist.html  22 Nov 2019 09:55:06 GMT -->
 </html>
