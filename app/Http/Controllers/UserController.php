@@ -128,7 +128,7 @@ class UserController extends Controller
             $order->phone_no = $request->phone;
             $order->email = $request->email;
             $order->note = $request->note;
-            // 
+            
             $order->product_no = $cart->product_id;
             $order->product_title = $cart->product_title;
             $order->product_image = $cart->product_image;
@@ -141,8 +141,13 @@ class UserController extends Controller
 
 
              }
-            return redirect()->back();
+            return redirect()->route('track_order');
 
+    }
+    public function track_order(){
+        $user_id = Auth::guard('web')->user()->id;
+        $orders = order::where('user_id', $user_id)->get();
+        return view('track_order',compact('orders'));
     }
 
 }

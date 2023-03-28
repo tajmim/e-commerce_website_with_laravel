@@ -59,6 +59,13 @@ Route::get('/approve_user/{id}',[AdminController::Class,'approve_reseller']);
 Route::get('/unapprove_user/{id}',[AdminController::Class,'unapprove_reseller']);
 Route::get('/manage_editors',[AdminController::Class,'manage_editors']);
 Route::get('/delete_editor/{id}',[AdminController::Class,'delete_editor']);
+Route::get('/manage_order',[AdminController::Class,'manage_order']);
+Route::get('/accept_order/{id}',[AdminController::Class,'accept_order']);
+Route::get('/cancel_order/{id}',[AdminController::Class,'cancel_order']);
+Route::get('/order_details/{id}',[AdminController::Class,'order_details']);
+Route::get('/in_ship/{id}',[AdminController::Class,'in_ship']);
+Route::get('/delivered_order/{id}',[AdminController::Class,'delivered_order']);
+Route::get('/completed_order',[AdminController::Class,'completed_order']);
 // admincontroller end
 
 // usercontroller start
@@ -74,4 +81,5 @@ Route::get('/delete_cart/{id}',[UserController::Class,'delete_cart']);
 Route::get('/delete_wish/{id}',[UserController::Class,'delete_wish']);
 Route::get('/checkout',[UserController::Class,'checkout']);
 Route::post('/proceed_to_checkout',[UserController::Class,'proceed_to_checkout']);
+Route::get('/track_order',[UserController::Class,'track_order']);
 // usercontroller end

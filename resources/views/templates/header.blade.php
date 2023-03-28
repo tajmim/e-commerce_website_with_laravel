@@ -86,19 +86,21 @@
                                 <li>
                                     <a href="/shop" class="sf-with-ul">Shop</a>
                                 </li>
-                                 <li>
-                                    <a href="product.html" class="sf-with-ul">Product</a>                                   
-                                </li>
                                 <li>
                                     <a href="#" class="sf-with-ul">Pages</a>
+                                    <ul>
+                                        <li>
+                                            <a href="about.html" class="sf-with-ul">About</a>
 
+                                                                                    </li>
+                                        <li>
+                                            <a href="contact.html" class="sf-with-ul">Contact</a>
+                                        </li>                                        <li><a href="faq.html">FAQs</a></li>
+                                        <li><a href="404.html">Error 404</a></li>                                    </ul>
                                 </li>
                                 <li>
                                     <a href="blog.html" class="sf-with-ul">Blog</a>
-                                </li>
-                                <li>
-                                    <a href="elements-list.html" class="sf-with-ul">Elements</a>
-                                </li>
+                                </li>                            
                             </ul><!-- End .menu -->
                         </nav><!-- End .main-nav -->
                     </div><!-- End .header-left -->

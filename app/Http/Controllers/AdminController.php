@@ -6,6 +6,7 @@ use App\Models\category;
 use App\Models\product;
 use App\Models\User;
 use App\Models\Admin;
+use App\Models\order;
 
 use Illuminate\Http\Request;
 
@@ -237,6 +238,44 @@ class AdminController extends Controller
         $editor->delete();
         return redirect()->back();
     }
+    public function manage_order(){
+        $orders = order::All();
+        return view('admin.manage_order',compact('orders'));
+    }
+    public function accept_order($id){
+        $order = order::find($id);
+        $order->order_status = 'accepted';
+        $order->save();
+        return redirect()->back();
+    }
+    public function cancel_order($id){
+        $order = order::find($id);
+        $order->order_status = 'canceled';
+        $order->save();
+        return redirect()->back();
+    }
+    public function in_ship($id){
+        $order = order::find($id);
+        $order->order_status = 'in_ship';
+        $order->save();
+        return redirect()->back();
+    }
+    public function delivered_order($id){
+        $order = order::find($id);
+        $order->order_status = 'delivered';
+        $order->save();
+        return redirect()->back();
+    }
+
+    public function completed_order(){
+        $orders = order::All();
+        return view('admin.completed_order',compact('orders'));
+    }
+    public function order_details($id){
+        $order = order::find($id);
+        return view('admin.order_details',compact('order'));
+    }
+
 
 
 
