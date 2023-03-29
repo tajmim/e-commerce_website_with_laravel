@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\AdminController;
+use App\Http\Controllers\Auth\SocialLoginController;
 use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
 
@@ -27,7 +28,10 @@ Route::middleware('auth')->group(function () {
 
 require __DIR__.'/auth.php';
 
-
+Route::get('authorized/google', [SocialLoginController::class, 'redirectToGoogle']);
+Route::get('auth/google/call-back', [SocialLoginController::class, 'handleGoogleCallback']);
+Route::get('authorized/facebook', [SocialLoginController::class, 'redirectToFacebook']);
+Route::get('auth/facebook/call-back', [SocialLoginController::class, 'handleFacebookCallback']);
 
 
 Route::get('/admin/dashboard', function () {
@@ -82,4 +86,5 @@ Route::get('/delete_wish/{id}',[UserController::Class,'delete_wish']);
 Route::get('/checkout',[UserController::Class,'checkout']);
 Route::post('/proceed_to_checkout',[UserController::Class,'proceed_to_checkout']);
 Route::get('/track_order',[UserController::Class,'track_order']);
+Route::post('/submit_review/{id}',[UserController::Class,'submit_review']);
 // usercontroller end

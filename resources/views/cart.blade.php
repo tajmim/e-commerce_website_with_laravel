@@ -62,7 +62,7 @@
 													</figure>
 
 													<h3 class="product-title">
-														<a href="#">{{$cart->product_title}}</a>
+														<a href="/product_details/{{$cart->product_id}}">{{$cart->product_title}}</a>
 													</h3><!-- End .product-title -->
 												</div><!-- End .product -->
 											</td>

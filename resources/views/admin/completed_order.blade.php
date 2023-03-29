@@ -49,7 +49,7 @@
                         $sirial = 0;
                         @endphp
                         @foreach($orders as $order)
-                        @if($order->order_status == 'delivered')
+                        @if($order->order_status == 'delivered' || $order->order_status == 'reviewed')
                         @php
                         $sirial++;
                         @endphp

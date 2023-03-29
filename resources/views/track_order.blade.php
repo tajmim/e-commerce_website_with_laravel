@@ -5,6 +5,35 @@
 <!-- molla/cart.html  22 Nov 2019 09:55:06 GMT -->
 <head>
       @include('templates.head');
+      <style>
+        /* Style the accordion container */
+        .accordion {
+            background-color: #eee;
+            color: #444;
+            cursor: pointer;
+            padding: 18px;
+            width: 100%;
+            border: none;
+            text-align: left;
+            outline: none;
+            font-size: 15px;
+            transition: 0.4s;
+        }
+
+        /* Style the active class, which is used when the accordion is clicked on */
+        .accordion-active, .accordion:hover {
+            background-color: #ccc;
+        }
+
+        /* Style the panel that holds the content */
+        .panel {
+            padding: 0 18px;
+            background-color: white;
+            display: none;
+            overflow: hidden;
+        }
+    </style>
+
 </head>
 
 <body>
@@ -33,7 +62,7 @@
             	<div class="cart">
 	                <div class="container">
 	                	<div class="row">
-	                		<div class="col-lg-9">
+	                		<div class="col-lg-12">
 	                			<table class="table table-cart table-mobile">
 									<thead>
 										<tr>
@@ -42,6 +71,7 @@
 											<th>Quantity</th>
 											<th>Total</th>
                                             <th>Status</th>
+                                            <th>Review</th>
 
 											<th></th>
 										</tr>
@@ -70,8 +100,6 @@
 											</td>
 											<td class="price-col">
                                                 {{$order->product_price}}
-                                                
-
                                             </td>
 											<td class="quantity-col">
                                                 <div class="cart-product-quantity">
@@ -94,6 +122,22 @@
                                 text-white
                                 ">{{$order->order_status}}</span>
                                             </td>
+                                            <td>
+                                                @if($order->order_status == 'delivered')
+
+                                               <button class="accordion">Write a review</button>
+                                                <div class="panel">
+                                                    <form action="{{url('submit_review',$order->id)}}" method="post">
+                                                        @csrf
+                                                        <div class="mb-3">
+                                                          <input type="text" class="form-control" id="formGroupExampleInput" placeholder="Write you review here" name="review">
+                                                        </div>
+                                                        <input class="btn btn-primary text-primary" type="submit" value="submit">
+                                                    </form>
+                                                </div>
+                                                @endif
+
+                                            </td>
 										</tr>
                                         @endforeach
 									</tbody>
@@ -101,44 +145,7 @@
 
 	                			
 	                		</div><!-- End .col-lg-9 -->
-	                		<aside class="col-lg-3">
-	                			<div class="summary summary-cart">
-	                				<h3 class="summary-title">order total</h3><!-- End .summary-title -->
 
-	                				<table class="table table-summary">
-	                					<tbody>
-	                						<tr class="summary-subtotal">
-	                							<td>Subtotal:</td>
-	                							<td>{{$total_cost}}</td>
-	                						</tr><!-- End .summary-subtotal -->
-	                						<tr class="summary-shipping">
-	                							<td>Shipping:</td>
-	                							<td>&nbsp;</td>
-	                						</tr>
-
-	                						<tr class="summary-shipping-row">
-	                							<td>
-													Shipping cost
-	                							</td>
-	                							<td>60</td>
-	                						</tr><!-- End .summary-shipping-row -->
-
-	                						
-
-
-	                						<tr class="summary-total">
-	                							<td>Total:</td>
-	                							<td>
-                                                    {{$total_cost+60}}
-                                                </td>
-	                						</tr><!-- End .summary-total -->
-	                					</tbody>
-	                				</table><!-- End .table table-summary -->
-
-	                			</div><!-- End .summary -->
-
-		            			<a href="/shop" class="btn btn-outline-dark-2 btn-block mb-3"><span>CONTINUE SHOPPING</span><i class="icon-refresh"></i></a>
-	                		</aside><!-- End .col-lg-3 -->
 	                	</div><!-- End .row -->
 	                </div><!-- End .container -->
                 </div><!-- End .cart -->
@@ -447,6 +454,27 @@
     <script src="user/assets/js/bootstrap-input-spinner.js"></script>
     <!-- Main JS File -->
     <script src="user/assets/js/main.js"></script>
+    <script>
+        // Add an event listener to each accordion button
+        var acc = document.getElementsByClassName("accordion");
+        var i;
+
+        for (i = 0; i < acc.length; i++) {
+            acc[i].addEventListener("click", function() {
+                // Toggle between adding and removing the "active" class to highlight the button
+                this.classList.toggle("accordion-active");
+
+                // Toggle between hiding and showing the active panel
+                var panel = this.nextElementSibling;
+                if (panel.style.display === "block") {
+                    panel.style.display = "none";
+                } else {
+                    panel.style.display = "block";
+                }
+            });
+        }
+    </script>
+
 </body>
 
 

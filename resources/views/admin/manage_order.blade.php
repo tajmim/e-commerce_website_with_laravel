@@ -51,7 +51,7 @@
                         $sirial = 0;
                         @endphp
                         @foreach($orders as $order)
-                        @if($order->order_status != 'delivered' && $order->order_status != 'canceled')
+                        @if($order->order_status != 'delivered' && $order->order_status != 'canceled' && $order->order_status != 'reviewed')
                         @php
                         $sirial++;
                         @endphp

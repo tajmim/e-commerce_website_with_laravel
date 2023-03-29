@@ -7,6 +7,7 @@ use App\Models\User;
 use App\Models\Cart;
 use App\Models\wish;
 use App\Models\order;
+use App\Models\review;
 use Illuminate\Support\Facades\Auth;
 
 use Illuminate\Http\Request;
@@ -25,8 +26,9 @@ class UserController extends Controller
     }
     public function product_details($id){
         $product = product::find($id);
+        $reviews = review::where('product_id' , $id)->get();
         $like_products = product::all();
-        return view('product_details',compact('product','like_products'));
+        return view('product_details',compact('product','like_products','reviews'));
 
       
     }
@@ -141,13 +143,31 @@ class UserController extends Controller
 
 
              }
-            return redirect()->route('track_order');
+            return redirect('/track_order');
 
     }
     public function track_order(){
         $user_id = Auth::guard('web')->user()->id;
         $orders = order::where('user_id', $user_id)->get();
         return view('track_order',compact('orders'));
+    }
+    public function submit_review(Request $request, $id){
+        $order = order::find($id);
+        $review = new review;
+
+        $review->product_id = $order->product_no;
+        $review->product_title = $order->product_title;
+        $review->user_id = $order->user_id;
+        $review->first_name = $order->first_name;
+        $review->last_name = $order->last_name;
+        $review->email = $order->email;
+        $review->review = $request->review;
+        $review->save();
+        $order->order_status = 'reviewed';
+        $order->save();
+        return redirect()->back();
+
+
     }
 
 }
