@@ -44,7 +44,24 @@
             </x-primary-button>
         </div>
 
-        <div class="flex items-center justify-end mt-4">
+
+
+
+<div style="width: 100%; height: 50px;margin-top: 20px;">
+  <div style="float: left; width: 50%; height: 100%"><a href="{{ url('authorized/google') }}">
+                <img src="https://developers.google.com/identity/images/btn_google_signin_dark_normal_web.png" >
+            </a></div>
+  <div style="float: right; width: 50%; height:100%">
+    <a class="mt-2 btn btn-primary" href="{{ url('authorized/facebook') }}" style="margin-top: 20px !important;background: #4c6ef5;color: #ffffff;padding: 10px 10px;border-radius:7px;" id="btn-fblogin">
+                    <i class="fa fa-facebook-square" aria-hidden="true"></i> Login with Facebook
+                </a>
+            </div>
+</div>
+
+
+
+
+        <!-- <div class="flex items-center justify-start mt-4">
             <a href="{{ url('authorized/google') }}">
                 <img src="https://developers.google.com/identity/images/btn_google_signin_dark_normal_web.png" style="margin-left: 3em;">
             </a>
@@ -54,6 +71,6 @@
                 <a class="ml-1 btn btn-primary" href="{{ url('authorized/facebook') }}" style="margin-top: 0px !important;background: #4c6ef5;color: #ffffff;padding: 5px;border-radius:7px;" id="btn-fblogin">
                     <i class="fa fa-facebook-square" aria-hidden="true"></i> Login with Facebook
                 </a>
-            </div>
+        </div> -->
     </form>
 </x-guest-layout>

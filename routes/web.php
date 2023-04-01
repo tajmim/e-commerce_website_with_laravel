@@ -87,4 +87,7 @@ Route::get('/checkout',[UserController::Class,'checkout']);
 Route::post('/proceed_to_checkout',[UserController::Class,'proceed_to_checkout']);
 Route::get('/track_order',[UserController::Class,'track_order']);
 Route::post('/submit_review/{id}',[UserController::Class,'submit_review']);
+Route::get('/billing_address',[UserController::Class,'billing_address']);
+Route::post('/add_address',[UserController::Class,'add_address']);
+Route::post('/edit_address/{id}',[UserController::Class,'edit_address']);
 // usercontroller end

@@ -39,7 +39,15 @@
                 <div class="max-w-xl">
                     @include('profile.partials.update-profile-information-form')
                 </div>
+            </div> 
+
+
+            <div class="p-4 sm:p-8 bg-white dark:bg-gray-800 shadow sm:rounded-lg">
+                <div class="max-w-xl">
+                    <a style="background: #1f2937;color:#fff;padding: 8px 16px;border-radius: 9px;" href="/billing_address">My Billing Address</a>
+                </div>
             </div>
+
 
             <div class="p-4 sm:p-8 bg-white dark:bg-gray-800 shadow sm:rounded-lg">
                 <div class="max-w-xl">
@@ -47,11 +55,7 @@
                 </div>
             </div>
 
-            <div class="p-4 sm:p-8 bg-white dark:bg-gray-800 shadow sm:rounded-lg">
-                <div class="max-w-xl">
-                    @include('profile.partials.delete-user-form')
-                </div>
-            </div>
+           
         </div>
     </div>
 </x-app-layout>

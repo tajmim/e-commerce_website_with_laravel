@@ -32,7 +32,8 @@
                                     <li><a href="tel:#"><i class="icon-phone"></i>Call: +0123 456 789</a></li>
                                     <li><a href="about.html">About Us</a></li>
                                     @auth
-                                    <li><a href="/view_wishlist"><i class="icon-heart-o"></i>Wishlist </a></li>
+                                    <li><a class="position-relative" href="/view_wishlist">Wishlist
+                                    <span class="position-absolute top-0 end-100 translate-middle badge rounded-pill bg-primary text-white" style="font-size: 11px;right: -18px;top: -6px;">{{count($wishes)}}</span> </a></li>
                                     @endauth
 
 
@@ -79,12 +80,12 @@
                         </a>
 
                         <nav class="main-nav">
-                            <ul class="menu sf-arrows">
+                            <ul class="menu ">
                                 <li class="megamenu-container active">
-                                    <a href="/" class="sf-with-ul">Home</a>
+                                    <a href="/" >Home</a>
                                 </li>
                                 <li>
-                                    <a href="/shop" class="sf-with-ul">Shop</a>
+                                    <a href="/shop">Shop</a>
                                 </li>
                                 <li>
                                     <a href="#" class="sf-with-ul">Pages</a>
@@ -119,8 +120,8 @@
                         
                         @auth
                         <div class="">
-                            <a href="/view_cart" style="font-size:30px">
-                                <i class="icon-shopping-cart"></i>
+                            <a href="/view_cart" style="font-size:30px" class="position-relative">
+                                <i class="icon-shopping-cart"></i><span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-primary text-white" style="font-size:13px">{{ count($carts) }}</span>
                                 
                             </a>
 

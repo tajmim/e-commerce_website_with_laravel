@@ -8,6 +8,7 @@ use App\Models\Cart;
 use App\Models\wish;
 use App\Models\order;
 use App\Models\review;
+use App\Models\billing_address;
 use Illuminate\Support\Facades\Auth;
 
 use Illuminate\Http\Request;
@@ -17,18 +18,41 @@ class UserController extends Controller
     public function home(){
         $products = product::orderBy('created_at', 'desc')->paginate(8);
         $categories = category::all();
-        return view('home', compact('products','categories'));
+
+        if( Auth::guard('web')->user() ){
+            $carts = cart::where('user_id',Auth::guard('web')->user()->id)->get();
+            $wishes = wish::where('user_id',Auth::guard('web')->user()->id)->get();
+            return view('home', compact('products','categories','carts','wishes'));
+        }
+        else{
+            return view('home', compact('products','categories'));        
+        }
     }
     public function shop(){
         $products = product::orderBy('created_at', 'desc')->paginate(8);
         $categories = category::all();
-        return view('shop', compact('products','categories'));
+        if( Auth::guard('web')->user() ){
+            $carts = cart::where('user_id',Auth::guard('web')->user()->id)->get();
+            $wishes = wish::where('user_id',Auth::guard('web')->user()->id)->get();
+            return view('shop', compact('products','categories','carts','wishes'));
+        }
+        else{
+            return view('shop', compact('products','categories'));
+        }
+        
     }
     public function product_details($id){
         $product = product::find($id);
         $reviews = review::where('product_id' , $id)->get();
         $like_products = product::all();
-        return view('product_details',compact('product','like_products','reviews'));
+        if( Auth::guard('web')->user() ){
+            $carts = cart::where('user_id',Auth::guard('web')->user()->id)->get();
+            $wishes = wish::where('user_id',Auth::guard('web')->user()->id)->get();
+            return view('product_details',compact('product','like_products','reviews','carts','wishes'));
+        }
+        else{
+           return view('product_details',compact('product','like_products','reviews'));
+        }
 
       
     }
@@ -39,25 +63,32 @@ class UserController extends Controller
         $user->save();
         return redirect()->back();
     }
-    public function add_to_cart(Request $request , $product_id){
+    public function add_to_cart(Request $request , $product_no){
         if(auth::guard('web')->user()){
             $cart = new Cart;
-            $product = Product::find($product_id);
+            $product = Product::find($product_no);
 
-            $cart->user_id = Auth::guard('web')->user()->id;
-            $cart->user_name = Auth::guard('web')->user()->name;
-
-            $cart->product_id = $product->id;
-            $cart->product_title = $product->title;
-            $cart->product_image = $product->image;
-            $cart->quantity = $request->quantity;
-            if(Auth::guard('web')->user()->usertype == 'reseller'){
-                $cart->price = ($product->reseller_price);
+            $found_cart = Cart::where('product_id',$product_no)->where('user_id',Auth::guard('web')->user()->id)->first();
+            if($found_cart){
+                $found_cart->quantity += $request->quantity;
+                $found_cart->save();
             }
             else{
-                $cart->price = ($product->price);
+                $cart->user_id = Auth::guard('web')->user()->id;
+                $cart->user_name = Auth::guard('web')->user()->name;
+
+                $cart->product_id = $product->id;
+                $cart->product_title = $product->title;
+                $cart->product_image = $product->image;
+                $cart->quantity = $request->quantity;
+                if(Auth::guard('web')->user()->usertype == 'reseller'){
+                    $cart->price = ($product->reseller_price);
+                }
+                else{
+                    $cart->price = ($product->price);
+                }
+                $cart->save();
             }
-            $cart->save();
 
             return redirect()->back();
 
@@ -70,13 +101,15 @@ class UserController extends Controller
     public function view_cart(){
         $user_id = Auth::guard('web')->user()->id;
         $carts = Cart::where('user_id', $user_id)->get();
-        return view('cart',compact('carts'));
+        $wishes = wish::where('user_id',Auth::guard('web')->user()->id)->get();
+        return view('cart',compact('carts','wishes'));
+
+
     }
     public function add_to_wishlist($product_id){
         $customer_id = Auth::guard('web')->user()->id;
         $productt = product::find($product_id);
         $wish = new wish;
-
 
         $wish->user_id = $customer_id;
         $wish->user_name = Auth::guard('web')->user()->name;
@@ -95,7 +128,14 @@ class UserController extends Controller
     public function view_wishlist(){
         $user_no = Auth::guard('web')->user()->id;
         $wishes = wish::where('user_id',$user_no)->get();
-        return view("view_wish", compact('wishes'));
+        
+         if( Auth::guard('web')->user() ){
+            $carts = cart::where('user_id',Auth::guard('web')->user()->id)->get();
+            return view("view_wish", compact('wishes','carts'));
+        }
+        else{
+          return view("view_wish", compact('wishes'));
+        }
     }
     public function delete_cart($id){
         $cart = cart::find($id);
@@ -111,7 +151,9 @@ class UserController extends Controller
     public function checkout(){
         $user_id = Auth::guard('web')->user()->id;
         $carts = Cart::where('user_id', $user_id)->get();
-        return view('checkout',compact('carts'));
+        $wishes = wish::where('user_id',Auth::guard('web')->user()->id)->get();
+        $found_billing = billing_address::where('user_id',Auth::guard('web')->user()->id)->first();
+        return view('checkout',compact('carts','wishes','found_billing'));
     }
     public function proceed_to_checkout(Request $request){
         $user_id = Auth::guard('web')->user()->id;
@@ -149,7 +191,9 @@ class UserController extends Controller
     public function track_order(){
         $user_id = Auth::guard('web')->user()->id;
         $orders = order::where('user_id', $user_id)->get();
-        return view('track_order',compact('orders'));
+        $carts = cart::where('user_id',Auth::guard('web')->user()->id)->get();
+        $wishes = wish::where('user_id',Auth::guard('web')->user()->id)->get();
+        return view('track_order',compact('orders','carts','wishes'));
     }
     public function submit_review(Request $request, $id){
         $order = order::find($id);
@@ -168,6 +212,55 @@ class UserController extends Controller
         return redirect()->back();
 
 
+    }
+
+    public function billing_address(){
+
+        $carts = Cart::where('user_id', Auth::guard('web')->user()->id)->get();
+        $wishes = wish::where('user_id',Auth::guard('web')->user()->id)->get();
+
+        $found_billing = billing_address::where('user_id',Auth::guard('web')->user()->id)->first();
+        if($found_billing){
+            return view('edit_billing_add',compact('carts','wishes','found_billing'));
+        }
+        else{
+            return view('billing_address_save',compact('carts','wishes'));
+        }
+
+
+        
+    }
+    public function add_address(Request $request){
+            $b_add = new billing_address;
+            $b_add->user_id = Auth::guard('web')->user()->id;
+            $b_add->first_name = $request->f_name;
+            $b_add->last_name = $request->l_name;
+            
+            $b_add->country = $request->country;
+            $b_add->street_address = $request->street_add;
+            $b_add->city = $request->city;
+            $b_add->state = $request->state;
+            $b_add->postcode = $request->postcode;
+            $b_add->phone_no = $request->phone;
+            $b_add->email = $request->email; 
+            $b_add->save();
+            return redirect()->back();
+    }
+    public function edit_address(Request $request,$id){
+            $b_add = billing_address::find($id);
+            $b_add->user_id = Auth::guard('web')->user()->id;
+            $b_add->first_name = $request->f_name;
+            $b_add->last_name = $request->l_name;
+            
+            $b_add->country = $request->country;
+            $b_add->street_address = $request->street_add;
+            $b_add->city = $request->city;
+            $b_add->state = $request->state;
+            $b_add->postcode = $request->postcode;
+            $b_add->phone_no = $request->phone;
+            $b_add->email = $request->email; 
+            $b_add->save();
+            return redirect()->back();
     }
 
 }

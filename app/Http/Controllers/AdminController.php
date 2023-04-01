@@ -7,6 +7,7 @@ use App\Models\product;
 use App\Models\User;
 use App\Models\Admin;
 use App\Models\order;
+use Illuminate\Support\Facades\Auth;
 
 use Illuminate\Http\Request;
 
@@ -47,6 +48,12 @@ class AdminController extends Controller
         $product->price = $request->price;
         $product->reseller_price = $request->reseller_price;
         $product->discount_price = $request->discount_price;
+        if(Auth::guard('admin')->user()->usertype == 'admin'){
+            $product->status = 'approved';
+        }
+        else{
+            $product->status = 'unapproved';
+        }
         $product->quantity = $request->quantity;
 
         //img add
