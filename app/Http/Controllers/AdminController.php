@@ -55,6 +55,8 @@ class AdminController extends Controller
             $product->status = 'unapproved';
         }
         $product->quantity = $request->quantity;
+        $product->minimum_quantity_reseller = $request->minimum_quantity_reseller;
+        
 
         //img add
         if($request->image){

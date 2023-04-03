@@ -13,26 +13,26 @@ return new class extends Migration
     {
         Schema::create('orders', function (Blueprint $table) {
             $table->id();
-            $table->string('user_id');
-            $table->string('first_name');
-            $table->string('last_name');
-            $table->string('company_name');
-            $table->string('country');
-            $table->string('street_address');
-            $table->string('city');
-            $table->string('state');
-            $table->string('postcode');
-            $table->string('phone_no');
-            $table->string('email');
-            $table->string('note');
+            $table->string('user_id')->nullable();
+            $table->string('first_name')->nullable();
+            $table->string('last_name')->nullable();
+            $table->string('company_name')->nullable();
+            $table->string('country')->nullable();
+            $table->string('street_address')->nullable();
+            $table->string('city')->nullable();
+            $table->string('state')->nullable();
+            $table->string('postcode')->nullable();
+            $table->string('phone_no')->nullable();
+            $table->string('email')->nullable();
+            $table->string('note')->nullable();
 
-            $table->string('product_no');
-            $table->string('product_title');
-            $table->string('product_image');
-            $table->string('product_quantity');
-            $table->string('product_price');
+            $table->string('product_no')->nullable();
+            $table->string('product_title')->nullable();
+            $table->string('product_image')->nullable();
+            $table->string('product_quantity')->nullable();
+            $table->string('product_price')->nullable();
 
-            $table->string('order_status');
+            $table->string('order_status')->nullable();
             $table->timestamps();
         });
     }

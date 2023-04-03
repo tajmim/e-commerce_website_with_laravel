@@ -106,6 +106,12 @@
                     <input type="text" class="form-control" id="quantity"
                         name="quantity">
                 </div>
+
+                <div class="mb-3">
+                    <label for="quantity" class="form-label">Minimum Quantity for reseller</label>
+                    <input type="text" class="form-control" id="quantity"
+                        name="minimum_quantity_reseller">
+                </div>
                 
             
                 <button type="submit" class="btn btn-primary">Add Product</button>

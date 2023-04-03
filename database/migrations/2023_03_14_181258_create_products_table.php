@@ -26,6 +26,7 @@ return new class extends Migration
             $table->string('image3')->nullable();
             $table->string('status')->default('unapproved');
             $table->string('quantity')->nullable();
+            $table->string('minimum_quantity_reseller')->nullable();
             $table->timestamps();
         });
     }

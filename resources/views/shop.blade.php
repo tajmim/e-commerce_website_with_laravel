@@ -84,7 +84,15 @@
                                                 <div class="col-6">
                                                     <div class="form-group">
                                                         <!-- <label for="qty" class="form-level">Qty:</label> -->
-                                                        <input type="number" id="sticky-cart-qty" class="form-control" value="1" min="1" max="{{$product->quantity}}"  step="1" data-decimals="0" name="quantity" required>
+                                                        <input type="number" id="sticky-cart-qty" class="form-control" value="1" min="
+                                                        @auth
+                                                        @if( auth::guard('web')->user()->usertype == 'user' )
+                                                        1
+                                                        @else
+                                                        {{$product->minimum_quantity_reseller}}
+                                                        @endif
+                                                        @endauth
+                                                        " max="{{$product->quantity}}"  step="1" data-decimals="0" name="quantity" required>
                                                     </div>
                                                 </div>
                                                 <div class="col-6">

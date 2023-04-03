@@ -129,7 +129,15 @@
                                                 <div class="col-6">
                                                     <div class="form-group">
                                                         <!-- <label for="qty" class="form-level">Qty:</label> -->
-                                                        <input type="number" id="sticky-cart-qty" class="form-control" value="1" min="1" max="{{$product->quantity}}"  step="1" data-decimals="0" name="quantity" required>
+                                                        <input type="number" id="sticky-cart-qty" class="form-control" value="1" min="
+                                                        @auth
+                                                        @if( auth::guard('web')->user()->usertype == 'user' )
+                                                        1
+                                                        @else
+                                                        {{$product->minimum_quantity_reseller}}
+                                                        @endif
+                                                        @endauth
+                                                        " max="{{$product->quantity}}"  step="1" data-decimals="0" name="quantity" required>
                                                     </div>
                                                 </div>
                                                 <div class="col-6">
@@ -302,7 +310,15 @@
                                                 <div class="col-6">
                                                     <div class="form-group">
                                                         <!-- <label for="qty" class="form-level">Qty:</label> -->
-                                                        <input type="number" id="sticky-cart-qty" class="form-control" value="1" min="1" max="{{$product->quantity}}"  step="1" data-decimals="0" name="quantity" required>
+                                                        <input type="number" id="sticky-cart-qty" class="form-control" value="1" min="
+                                                        @auth
+                                                        @if( auth::guard('web')->user()->usertype == 'user' )
+                                                        1
+                                                        @else
+                                                        {{$like_product->minimum_quantity_reseller}}
+                                                        @endif
+                                                        @endauth
+                                                        " max="{{$product->quantity}}"  step="1" data-decimals="0" name="quantity" required>
                                                     </div>
                                                 </div>
                                                 <div class="col-6">
@@ -369,65 +385,9 @@
     <button id="scroll-top" title="Back to Top"><i class="icon-arrow-up"></i></button>
 
     <!-- Sticky Bar -->
-    <div class="sticky-bar">
-        <div class="container">
-            <div class="row">
-                <div class="col-6">
-                    <figure class="product-media">
-                        <a href="product.html">
-                            <img src="img_product/{{$product->image}}">
-                        </a>
-                    </figure><!-- End .product-media -->
-                    <h4 class="product-title"><a href="product.html">{{$product->title}}</a></h4><!-- End .product-title -->
-                </div><!-- End .col-6 -->
+    
 
-                <div class="col-6 justify-content-end">
-                    <div class="product-price">
-                                            @auth
-
-                                            @if( Auth::guard('web')->user()->usertype == 'reseller' )
-                                               <h1 style="width: 100%;">Regular Price <span style="text-decoration:line-through;color:blue">{{$product->price}}</span> </h1>
-
-                                               <h1 style="width: 100%;">Reseller price : <span style="color:blue;">{{$product->reseller_price}}</span></h1>
-                                            @else
-                                            <h1 style="width: 100%;">Regular Price <span style="color:blue;">{{$product->price}}</span> </h1>
-                                            <br>
-                                            @endif
-
-                                        @else
-                                        <p style="width: 100%;">Regular Price <span style="color:blue;">{{$product->price}}</span> </p>
-
-                                        @endauth                    
-                                    </div><!-- End .product-price -->
-                    <div class="product-details-quantity">
-                        <form action="{{url('add_to_cart',$product->id)}}" method="POST">
-                                            @csrf
-
-                                            <div class="row">
-                                                <div class="col-6">
-                                                    <div class="form-group">
-                                                        <!-- <label for="qty" class="form-level">Qty:</label> -->
-                                                        <input type="number" id="sticky-cart-qty" class="form-control" value="1" min="1" max="{{$product->quantity}}"  step="1" data-decimals="0" name="quantity" required>
-                                                    </div>
-                                                </div>
-                                                <div class="col-6">
-                                                    <input style="padding: 8px 26px;" type="submit" name="submit" class="btn-product btn-cart" value="Add to cart">
-                                                </div>
-                                            </div>
-                                            
-                                            
-                                        </form>
-                                                
-                    </div><!-- End .product-details-quantity -->
-
-                    <div class="product-details-action">
-                        
-                        <a href="#" class="btn-product btn-wishlist" title="Wishlist"><span>Add to Wishlist</span></a>
-                    </div><!-- End .product-details-action -->
-                </div><!-- End .col-6 -->
-            </div><!-- End .row -->
-        </div><!-- End .container -->
-    </div><!-- End .sticky-bar -->
+    <!-- End .sticky-bar -->
 
     <!-- Mobile Menu -->
     <div class="mobile-menu-overlay"></div><!-- End .mobil-menu-overlay -->
