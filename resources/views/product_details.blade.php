@@ -131,7 +131,7 @@
                                                         <!-- <label for="qty" class="form-level">Qty:</label> -->
                                                         <input type="number" id="sticky-cart-qty" class="form-control" value="1" min="
                                                         @auth
-                                                        @if( auth::guard('web')->user()->usertype == 'user' )
+                                                        @if( auth::guard('web')->user()->usertype == 'customer' )
                                                         1
                                                         @else
                                                         {{$product->minimum_quantity_reseller}}
@@ -298,7 +298,27 @@
                                 </a>
 
                                 <div class="product-action-vertical">
-                                    <a href="/add_to_wishlist/{{$like_product->id}}" class="btn-product-icon btn-wishlist btn-expandable"><span>add to wishlist</span></a>
+                                    @auth
+                                                <?php
+                                                $found = 0;
+                                                foreach ($wishes as $wish) {
+                                                    if($wish->product_id==$product->id){
+                                                        $found = 1;
+                                                        $delete_wish_id = $wish->id;
+
+
+                                                    } 
+                                                }
+
+                                                 ?>
+                                                 
+                                                 @if($found == 0)
+                                                    <a href="/add_to_wishlist/{{$like_product->id}}" class="btn-product-icon btn-wishlist btn-expandable"><span>add to wishlist</span></a>
+                                                @else
+                                                    <a href="/delete_wish/{{$delete_wish_id}}" class="btn-product-icon btn-wishlist btn-expandable delete-wish-icon"><span>Delete From Wishlist</span></a>
+                                                @endif
+                                            @endauth
+
                                     
                                 </div><!-- End .product-action-vertical -->
 
@@ -312,7 +332,7 @@
                                                         <!-- <label for="qty" class="form-level">Qty:</label> -->
                                                         <input type="number" id="sticky-cart-qty" class="form-control" value="1" min="
                                                         @auth
-                                                        @if( auth::guard('web')->user()->usertype == 'user' )
+                                                        @if( auth::guard('web')->user()->usertype == 'customer' )
                                                         1
                                                         @else
                                                         {{$like_product->minimum_quantity_reseller}}
@@ -321,8 +341,8 @@
                                                         " max="{{$product->quantity}}"  step="1" data-decimals="0" name="quantity" required>
                                                     </div>
                                                 </div>
-                                                <div class="col-6">
-                                                    <input style="padding: 8px 26px;" type="submit" name="submit" class="btn-product btn-cart" value="Add to cart">
+                                                <div class="col-4">
+                                                    <input style="padding: 8px 15px; font-size: 15px;" type="submit" name="submit" class="btn-product btn-cart" value="Add to cart">
                                                 </div>
                                             </div>
                                             

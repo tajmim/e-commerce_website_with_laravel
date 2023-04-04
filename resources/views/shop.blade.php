@@ -48,8 +48,6 @@
                                         </a>
 
                                         <div class="product-action-vertical">
-
-
                                             @auth
                                                 <?php
                                                 $found = 0;
@@ -67,7 +65,7 @@
                                                  @if($found == 0)
                                                     <a href="/add_to_wishlist/{{$product->id}}" class="btn-product-icon btn-wishlist btn-expandable"><span>add to wishlist</span></a>
                                                 @else
-                                                    <a href="/add_to_wishlist/{{$delete_wish_id}}" class="btn-product-icon btn-wishlist btn-expandable delete-wish-icon"><span>Delete From Wishlist</span></a>
+                                                    <a href="/delete_wish/{{$delete_wish_id}}" class="btn-product-icon btn-wishlist btn-expandable delete-wish-icon"><span>Delete From Wishlist</span></a>
                                                 @endif
                                             @endauth
 
@@ -86,7 +84,7 @@
                                                         <!-- <label for="qty" class="form-level">Qty:</label> -->
                                                         <input type="number" id="sticky-cart-qty" class="form-control" value="1" min="
                                                         @auth
-                                                        @if( auth::guard('web')->user()->usertype == 'user' )
+                                                        @if( auth::guard('web')->user()->usertype == 'customer' )
                                                         1
                                                         @else
                                                         {{$product->minimum_quantity_reseller}}

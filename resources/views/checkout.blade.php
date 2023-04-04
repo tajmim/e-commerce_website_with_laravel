@@ -38,6 +38,7 @@
 		                	<div class="row">
 		                		<div class="col-lg-9">
 		                			<h2 class="checkout-title">Billing Details</h2><!-- End .checkout-title -->
+                                    @if($found_billing)
 		                				 <div class="row">
                                             <div class="col-sm-6">
                                                 <label>First Name *</label>
@@ -84,6 +85,55 @@
 
                                         <label>Email address *</label>
                                         <input type="email" class="form-control" name="email" value="{{$found_billing->email}}" required>
+                                        @else
+                                         <div class="row">
+                                            <div class="col-sm-6">
+                                                <label>First Name *</label>
+                                                <input type="text" class="form-control" name="f_name"  required>
+                                            </div><!-- End .col-sm-6 -->
+
+                                            <div class="col-sm-6">
+                                                <label>Last Name *</label>
+                                                <input type="text" class="form-control" name="l_name"  required>
+                                            </div><!-- End .col-sm-6 -->
+                                        </div><!-- End .row -->
+
+                                        
+                                        <label>Country *</label>
+                                        <input type="text" class="form-control" name="country"  required>
+
+                                        <label>Street address *</label>
+                                        <input type="text" class="form-control" placeholder="House number and Street name" name="street_add"  required>
+                                        
+
+                                        <div class="row">
+                                            <div class="col-sm-6">
+                                                <label>Town / City *</label>
+                                                <input type="text" class="form-control" name="city"  required>
+                                            </div><!-- End .col-sm-6 -->
+
+                                            <div class="col-sm-6">
+                                                <label>State / County *</label>
+                                                <input type="text" class="form-control" name="state" required>
+                                            </div><!-- End .col-sm-6 -->
+                                        </div><!-- End .row -->
+
+                                        <div class="row">
+                                            <div class="col-sm-6">
+                                                <label>Postcode / ZIP *</label>
+                                                <input type="text" class="form-control" name="postcode" required>
+                                            </div><!-- End .col-sm-6 -->
+
+                                            <div class="col-sm-6">
+                                                <label>Phone *</label>
+                                                <input type="tel" class="form-control" name="phone" required>
+                                            </div><!-- End .col-sm-6 -->
+                                        </div><!-- End .row -->
+
+                                        <label>Email address *</label>
+                                        <input type="email" class="form-control" name="email" 
+                                        required>
+                                        @endif
 	                					<label>Order notes (optional)</label>
 	        							<textarea class="form-control" cols="30" rows="4" placeholder="Notes about your order, e.g. special notes for delivery" name="note"></textarea>
 		                		</div><!-- End .col-lg-9 -->

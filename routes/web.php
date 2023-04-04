@@ -70,6 +70,7 @@ Route::get('/order_details/{id}',[AdminController::Class,'order_details']);
 Route::get('/in_ship/{id}',[AdminController::Class,'in_ship']);
 Route::get('/delivered_order/{id}',[AdminController::Class,'delivered_order']);
 Route::get('/completed_order',[AdminController::Class,'completed_order']);
+Route::post('/add_editor',[AdminController::Class,'add_editor']);
 // admincontroller end
 
 // usercontroller start

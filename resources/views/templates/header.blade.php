@@ -52,7 +52,7 @@
                                             @if (Route::has('register'))
                                             <li>
                                                 <a href="{{ route('register') }}">Register</a>
-                                                <
+                                                
                                             @endif
                                         @endauth
                                     

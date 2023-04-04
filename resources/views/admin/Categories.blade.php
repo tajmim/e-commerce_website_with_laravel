@@ -65,7 +65,7 @@
                     @endphp
                     <tr>
                         <th scope="row">{{$sirial}}</th>
-                        <td>{{$category->category_name}}</td>
+                        <td style="text-transform: capitalize;">{{$category->category_name}}</td>
                         <td><a class="badge bg-danger" href="/delete_cat/{{$category->id}}" onclick="return confirm('are you sure want to delete {{$category->category_name}} category?')")>x</a></td>
                     </tr>
                     @endforeach

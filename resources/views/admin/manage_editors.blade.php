@@ -27,10 +27,33 @@
             <!-- Navbar End -->
 
 
+            <h1 style="font-size: 30px; margin: 20px; font-weight: bold;">Add Editor</h1>
+
+            <form action="{{url('add_editor')}}" method="POST">
+                @csrf
+                <div class="mb-3">
+                    <label for="name" class="form-label">Name</label>
+                    <input type="text" class="form-control" id="name"
+                        name="name">
+                </div>
+                <div class="mb-3">
+                    <label for="email" class="form-label">email</label>
+                    <input type="email" class="form-control" id="email"
+                        name="email">
+                </div>
+                <div class="mb-3">
+                    <label for="password" class="form-label">password</label>
+                    <input type="password" class="form-control" id="password"
+                        name="password">
+                </div>
+                
+            
+                <button type="submit" class="btn btn-primary">Add editor</button>
+            </form>
            
 
             <!-- Request  for reseller-->
-                <h1 style="font-size: 30px; margin: 20px; font-weight: bold;">resquest for reseller:</h1>
+                <h1 style="font-size: 30px; margin: 20px; font-weight: bold;">Manage Editors:</h1>
                 <table class="table">
                     <thead>
                         <tr>

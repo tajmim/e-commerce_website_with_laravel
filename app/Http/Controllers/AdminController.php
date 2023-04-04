@@ -8,21 +8,42 @@ use App\Models\User;
 use App\Models\Admin;
 use App\Models\order;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Log;
+use Illuminate\Support\Facades\Hash;
+
 
 use Illuminate\Http\Request;
 
 class AdminController extends Controller
 {
     public function fun_categories(){
-        $categories = category::all();
-        return view('admin.Categories',compact('categories'));
+        try {
+            $categories = category::all();
+            return view('admin.Categories',compact('categories'));
+        } catch (\Exception $e) {
+            Log::error($e->getMessage());
+        }
+
+        
     }
     public function add_categories(Request $request){
-        $category = new category;
-        $category->category_name = $request->category_name;
-        $category->save();
+        try {
+            $category = new category;
+            $category->category_name = $request->category_name;
+            $category->save();
 
-        return redirect()->back();
+            return redirect()->back();
+
+
+        } catch (\Exception $e) {
+            // handle the exception here
+            Log::error($e->getMessage());
+        }
+
+
+
+
+        
 
     }
     public function delete_category($id){
@@ -56,7 +77,7 @@ class AdminController extends Controller
         }
         $product->quantity = $request->quantity;
         $product->minimum_quantity_reseller = $request->minimum_quantity_reseller;
-        
+
 
         //img add
         if($request->image){
@@ -181,7 +202,7 @@ class AdminController extends Controller
             $product->image2 = $imagename2;
         }
 
-        if($request->image3ss){
+        if($request->image3){
             $img3ss = 'img_product/'.$product->image3ss;
             File::delete($img3ss);
             $image3ss = $request->image3ss;
@@ -253,8 +274,11 @@ class AdminController extends Controller
     }
     public function accept_order($id){
         $order = order::find($id);
+        $product = product::find($order->product_no);
+        $product->quantity -= $order->product_quantity;
         $order->order_status = 'accepted';
         $order->save();
+        $product->save();
         return redirect()->back();
     }
     public function cancel_order($id){
@@ -283,6 +307,15 @@ class AdminController extends Controller
     public function order_details($id){
         $order = order::find($id);
         return view('admin.order_details',compact('order'));
+    }
+    public function add_editor(Request $request){
+        $admin = new Admin;
+        $admin->name = $request->name;
+        $admin->email = $request->email;
+        $pass = $request->password;
+        $admin->password = Hash::make($pass);
+        $admin->save();
+        return redirect()->back();
     }
 
 
